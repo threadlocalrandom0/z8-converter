@@ -1,1 +1,1 @@
-rootProject.name = "z8-x2t"
+rootProject.name = "z8-converter"

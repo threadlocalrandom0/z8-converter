@@ -3,8 +3,18 @@ plugins {
   application
 }
 
-group = "org.zenframework.z8.x2t"
-version = "1.3.0"
+group = "org.zenframework.z8.converter"
+version = "1.4.0"
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation("info.picocli:picocli:4.7.7")
+  implementation("org.jodconverter:jodconverter-local:4.4.11")
+  implementation(files(project.property("x2t.docbuilder.lib")!!))
+}
 
 java {
   sourceCompatibility = JavaVersion.VERSION_1_8
@@ -12,5 +22,5 @@ java {
 }
 
 application {
-  mainClassName = "org.zenframework.z8.x2t.Main"
+  mainClassName = "org.zenframework.z8.converter.Main"
 }

@@ -1,5 +1,6 @@
-package org.zenframework.z8.x2t;
+package org.zenframework.z8.converter;
 
+import org.jodconverter.core.util.IOUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -67,18 +68,14 @@ public final class X2t {
   }
 
   public InputStream run(InputStream source, String from, String to) throws IOException, InterruptedException, TransformerException {
-    Path workDir = Files.createTempDirectory(distDir, "x2t-");
+    Path workDir = Files.createTempDirectory("z8-converter-");
     Path x2tXml = workDir.resolve("x2t.xml");
     Path pathFrom = workDir.resolve("from." + from);
     Path pathTo = workDir.resolve("to." + to);
     Path tmpDir = workDir.resolve("tmp");
 
     try (OutputStream o = Files.newOutputStream(pathFrom)) {
-      byte[] buffer = new byte[8 * 1024];
-      int bytesRead;
-      while ((bytesRead = source.read(buffer)) != -1) {
-        o.write(buffer, 0, bytesRead);
-      }
+      IOUtils.copy(source, o);
     }
     Files.createDirectory(tmpDir);
 
