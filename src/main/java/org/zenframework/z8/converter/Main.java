@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 import static java.net.HttpURLConnection.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-@Command(name = "z8-converter", mixinStandardHelpOptions = true, version = "1.4.0")
+@Command(name = "z8-converter", mixinStandardHelpOptions = true, version = "1.4.1")
 public class Main implements Callable<Integer> {
   static final Pattern AMPERSAND = Pattern.compile("&");
   @Spec
@@ -172,8 +172,9 @@ public class Main implements Callable<Integer> {
   }
 
   @Override
-  public Integer call() {
-    throw new ParameterException(spec.commandLine(), "select mode: jod, x2t, docbuilder");
+  public Integer call() throws IOException {
+    docbuilder();
+    return 0;
   }
 
   private interface Convert {
